@@ -8,7 +8,6 @@
 *.pbxuser
 *.perspectivev3
 *.xccheckout
-*.xcodeproj/*
 *.xcscmblueprint
 ._*
 .accio/
