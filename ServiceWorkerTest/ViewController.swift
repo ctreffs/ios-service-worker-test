@@ -10,7 +10,12 @@ import WebKit
 
 class ViewController: UIViewController {
     
-    lazy var webView = WKWebView()
+    lazy var webView: WKWebView = {
+        let config = WKWebViewConfiguration()
+        config.limitsNavigationsToAppBoundDomains = true
+        let ww = WKWebView(frame: .zero, configuration: config)
+        return ww
+    }()
     
     lazy var checkServiceWorkerSupport: WKUserScript = {
         // https://gist.github.com/tiffanytse/863ceededcd3010085b5c1eea7206dd7
@@ -45,7 +50,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: "https://googlechrome.github.io/samples/service-worker/registration-events/")!
+        let url = URL(string: "https://tomayac.github.io/pwa-feature-detector/")!
+        //let url = URL(string: "https://googlechrome.github.io/samples/service-worker/registration-events/")!
         let req = URLRequest(url: url)
         webView.configuration.userContentController.addUserScript(checkServiceWorkerSupport)
         webView.load(req)
